@@ -3,15 +3,25 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/src/engine",
+                "${workspaceFolder}/src/engine/renderer",
+                "${workspaceFolder}/src/game",
+                "${workspaceFolder}/../External/include",
+                "${workspaceFolder}/../External/include/glad",
+                "${workspaceFolder}/../External/include/glm",
+                "${workspaceFolder}/../External/include/imgui",
+                "${workspaceFolder}/../External/include/KHR",
+                "${workspaceFolder}/../External/include/stb"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
-            "cStandard": "c17",
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/mingw-w64/mingw64/bin/g++.exe",
+            "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-gcc-x64"
         }

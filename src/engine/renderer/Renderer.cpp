@@ -39,7 +39,7 @@ Renderer::Renderer() {
     glDeleteShader(fragment);
 }
 
-Renderer::~Renderer() {
+Renderer::~Renderer() {     
     glDeleteProgram(shaderProgram);
 }
 
