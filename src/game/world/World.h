@@ -4,7 +4,7 @@
 class World {
 public:
     void init();
-    Renderable getRenderables();
+    
 private:
     Chunk chunk;
 };

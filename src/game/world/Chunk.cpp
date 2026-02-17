@@ -9,7 +9,3 @@ void Chunk::init() {
         }
     }
 }
-
-Renderable Chunk::getRenderable() {
-    return {mesh, position};
-}

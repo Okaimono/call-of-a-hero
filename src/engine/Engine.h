@@ -4,7 +4,6 @@
 #include "renderer/Renderer.h"
 #include "renderer/RenderPipeline.h"
 #include "Scene.h"
-#include "renderer/Mesh.h"
 #include "renderer/Camera.h"
 #include "Application.h"
 

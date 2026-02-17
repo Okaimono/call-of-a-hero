@@ -7,12 +7,12 @@ Engine::Engine(int width, int height, const char* title, Application& app)
 {}
 
 void Engine::run() {
-    application.onInit();
     inputManager.init(window.getHandle());
+    renderPipeline.init(renderer);
+    application.onInit(renderPipeline);
 
     while (!window.shouldClose()) {
         renderer.clear();
-
         inputManager.update();
 
         application.onUpdate(1.0f / 60.0f, inputManager);
@@ -24,4 +24,4 @@ void Engine::run() {
         window.swapBuffers();
         window.pollEvents();
     } 
-}
+} 
