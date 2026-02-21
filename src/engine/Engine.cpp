@@ -8,20 +8,19 @@ Engine::Engine(int width, int height, const char* title, Application& app)
 
 void Engine::run() {
     inputManager.init(window.getHandle());
-    renderPipeline.init(renderer);
-    application.onInit(renderPipeline);
+    renderPipeline.init(renderer, resourceManager, scene);
+    application.onInit(renderPipeline, resourceManager);
 
     while (!window.shouldClose()) {
-        renderer.clear();
-        inputManager.update();
+        window.pollEvents();
 
-        application.onUpdate(1.0f / 60.0f, inputManager);
+        inputManager.update();
+        application.onUpdate(1.0f / 60.0f, inputManager, scene);
 
         renderPipeline.beginScene(camera.matrix(scene.activeCamera));
-        application.onRender(renderPipeline, scene);
+        application.onRender(renderPipeline);
         renderPipeline.endScene(renderer);
 
         window.swapBuffers();
-        window.pollEvents();
     } 
-} 
+}

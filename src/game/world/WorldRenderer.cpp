@@ -1,21 +1,17 @@
 #include "WorldRenderer.h"
+#include "game/assets.h"
 
 WorldRenderer::WorldRenderer() {}
 
 void WorldRenderer::init(RenderPipeline& renderPipeline) 
 {
+    chunk.init();
+
     MeshData meshData;
-    meshData.vertices = {
-        { glm::vec3(-0.5f, -0.5f, 0.0f) },
-        { glm::vec3( 0.5f, -0.5f, 0.0f) },
-        { glm::vec3( 0.0f,  0.5f, 0.0f) }
-    };
-
-    meshData.indices = { 0, 1, 2 };
-
-    chunk = renderPipeline.createMesh(meshData);
+    ChunkMesher::mesh(chunk, meshData);
+    handle = renderPipeline.createMesh(meshData);
 }
 
 void WorldRenderer::render(RenderPipeline& renderPipeline) {
-    renderPipeline.submit(chunk, glm::mat4(1.0f));
+    renderPipeline.submit(Assets::Shaders::DEFAULT, Assets::Textures::GAME_ATLAS, handle, glm::mat4(1.0f));
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include "RenderTypes.h"
+#include "OpenGL/Shader.h"
+#include "OpenGL/Texture.h"
 
 #include <unordered_map>
 
@@ -17,14 +19,12 @@ public:
     void destroyMesh(MeshHandle handle);
 
     void clear();
-    void draw(MeshHandle handle, const glm::mat4& mvp);
+    void draw(Shader& shader, Texture& texture, MeshHandle handle, const glm::mat4& mvp);
 
 private:
     void uploadMesh(GPUMesh& gpu, const MeshData& data);
 
     std::unordered_map<MeshHandle, GPUMesh> meshes;
     MeshHandle nextHandle = 1;
-
-    unsigned int shaderProgram;
-    int mvpLocation;
+    
 };

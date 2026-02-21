@@ -20,4 +20,3 @@ private:
     glm::vec2 lastMousePos = {0, 0};
     bool firstMouse = true;
 };
-

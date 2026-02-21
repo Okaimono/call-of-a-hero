@@ -1,5 +1,8 @@
 #pragma once
 #include "engine/renderer/RenderPipeline.h"
+#include "ChunkMesher.h"
+
+#include <glm/gtc/matrix_transform.hpp>
 
 class WorldRenderer {
 public:
@@ -9,5 +12,6 @@ public:
     void render(RenderPipeline& renderPipeline);
 
 private:
-    MeshHandle chunk;
+    MeshHandle handle;
+    Chunk chunk;
 };

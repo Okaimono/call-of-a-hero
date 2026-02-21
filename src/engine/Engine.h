@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderPipeline.h"
+#include "renderer/ResourceManager.h"
 #include "Scene.h"
 #include "renderer/Camera.h"
 #include "Application.h"
@@ -15,6 +16,7 @@ public:
 
 private:
     Application& application;
+    ResourceManager resourceManager;
     Window window;
     InputManager inputManager;
     Camera camera;

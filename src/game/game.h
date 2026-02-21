@@ -8,9 +8,12 @@
 
 class Game : public Application {
 public:
-    void onInit(RenderPipeline& renderPipeline) override;
-    void onUpdate(float dt, InputManager& inputManager) override;
-    void onRender(RenderPipeline& renderPipeline, Scene& scene) override;
+    void onInit(RenderPipeline& renderPipeline, ResourceManager& resourceManager) override;
+    void onUpdate(float dt, InputManager& inputManager, Scene& scene) override;
+    void onRender(RenderPipeline& renderPipeline) override;
+
+    void initShaders(ResourceManager& resourceManager);
+    void initTextures(ResourceManager& resourceManager);
 
     World world;
     PlayerController playerController;
