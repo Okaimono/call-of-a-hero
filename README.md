@@ -69,9 +69,3 @@ C++17, OpenGL 3.3, GLFW, GLAD, GLM, stb_image
 ## Note
 
 External dependencies and Mojang textures are not included in either repository. GLAD is bundled in `src/` for simplicity.
-
-C++17, OpenGL 3.3, GLFW, GLAD, GLM, stb_image
-
-## Note
-
-External dependencies and Mojang textures are not included in either repository. GLAD is bundled in `src/` for simplicity.
