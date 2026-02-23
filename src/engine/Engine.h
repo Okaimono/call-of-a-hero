@@ -9,6 +9,10 @@
 #include "Application.h"
 
 
+// Core engine. Owns every subsystem, orchestrates the main loop.
+// This knows nothing about underlying game systems, 
+// abstract applicaton interface is the only interaction.
+
 class Engine {
 public:
     Engine(int width, int height, const char* title, Application& app);
@@ -23,4 +27,5 @@ private:
     RenderPipeline renderPipeline;
     Scene scene;
     Renderer renderer;
+    
 };

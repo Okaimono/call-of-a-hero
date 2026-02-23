@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+// System to poll input state and allow game side classes to interface with this
+
 class InputManager {
 public:
     void init(GLFWwindow* win);

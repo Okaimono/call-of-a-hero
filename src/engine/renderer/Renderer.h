@@ -9,6 +9,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+// Low-level renderer — owns all GPU mesh resources and issues draw calls.
+// Game code never calls this directly; it goes through RenderPipeline.
+// Meshes are tracked by opaque handles so the game never touches OpenGL state.
+
 class Renderer {
 public:
     Renderer();

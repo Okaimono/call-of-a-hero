@@ -2,8 +2,18 @@
 
 enum class BlockID {
     AIR = 0,
-    GRASS = 1,
-    STONE = 2,
+    GRASS,
+    DIRT,
+    STONE,
+    COBBLESTONE,
+    SAND,
+    GRAVEL,
+    OAK_LOG,
+    OAK_LEAVES,
+    OAK_PLANKS,
+    WATER,
+    GLASS,
+    BEDROCK,
     COUNT
 };
 

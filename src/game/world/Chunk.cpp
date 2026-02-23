@@ -6,7 +6,6 @@ void Chunk::init() {
             for (int z = 0; z < 16; z++) {
                 if (x % 2) {
                     blocks[x][y][z] = BlockID::GRASS;
-
                 }
             }
         }

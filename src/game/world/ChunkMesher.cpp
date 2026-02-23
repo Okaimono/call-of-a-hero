@@ -1,6 +1,18 @@
 #include "ChunkMesher.h"
+#include "BlockData.h"
 
-const glm::vec3 faceVertices[6][4] = {
+/*
+ORDER: 
+1. Face Cull
+2. Greedy Mesh
+3. Terrain Generation
+4. Multithread
+5. Render Distance
+6. Frustrum Cull
+
+*/
+
+static const glm::vec3 faceVertices[6][4] = {
     // TOP
     {{0,1,0}, {1,1,0}, {1,1,1}, {0,1,1}},
     // BOTTOM
@@ -15,6 +27,19 @@ const glm::vec3 faceVertices[6][4] = {
     {{0,0,0}, {0,0,1}, {0,1,1}, {0,1,0}},
 };
 
+static const glm::ivec3 adjacentSide[(int)Face::COUNT] = {
+    {0, 1, 0},
+    {0, -1, 0},
+    {0, 0, 1},
+    {0, 0, -1},
+    {1, 0, 0},
+    {-1, 0, 0}
+};
+
+// Optimized face cull. Just change it so that, in future, where I might add
+// all the render distance system and stuff, make it so that those bordering chunks are 
+// brought here to cull required faces.
+
 void ChunkMesher::mesh(Chunk& chunk, MeshData& mesh) {
     mesh.vertices.clear();
     mesh.indices.clear();
@@ -22,33 +47,42 @@ void ChunkMesher::mesh(Chunk& chunk, MeshData& mesh) {
     for (int x = 0; x < 16; x++) {
         for (int y = 0; y < 256; y++) {
             for (int z = 0; z < 16; z++) {
-                if (chunk.getBlock(x, y, z) == BlockID::AIR) {continue; }
-                addFace(Face::TOP, mesh, glm::vec3((float)x, (float)y, (float)z));
-                addFace(Face::BOTTOM, mesh, glm::vec3((float)x, (float)y, (float)z));
-                addFace(Face::NORTH, mesh, glm::vec3((float)x, (float)y, (float)z));
-                addFace(Face::EAST, mesh, glm::vec3((float)x, (float)y, (float)z));
-                addFace(Face::SOUTH, mesh, glm::vec3((float)x, (float)y, (float)z));
-                addFace(Face::WEST, mesh, glm::vec3((float)x, (float)y, (float)z));
+                BlockID block = chunk.getBlock(x, y, z);
+                if (block == BlockID::AIR) { continue; }
+
+                glm::ivec3 pos(x, y, z);
+                for (int f = 0; f < (int)Face::COUNT; f++) {
+                    Face face = (Face)f;
+                    if (!isSolid(face, chunk, pos))
+                        addFace(block, face, mesh, glm::vec3(pos));
+                }
             }
         }
     }
 }
 
-void ChunkMesher::addFace(Face face, MeshData& mesh, glm::vec3 position) {
+bool ChunkMesher::isSolid(Face face, Chunk& chunk, const glm::ivec3& position) {
+    glm::ivec3 n = position + adjacentSide[(int)face];
+
+    if (n.x < 0 || n.x >= 16 ||
+        n.y < 0 || n.y >= 256 ||
+        n.z < 0 || n.z >= 16)
+        return false;
+
+    return chunk.getBlock(n.x, n.y, n.z) != BlockID::AIR;
+}
+
+void ChunkMesher::addFace(BlockID block, Face face, MeshData& mesh, const glm::vec3& position) {
     int f = (int)face;
     int baseIndex = mesh.vertices.size();
 
-    float s = 16.0f / 512.0f; // 0.03125 - one tile size
-    float uMin = 0.0f;
-    float uMax = s;
-    float vMin = 1.0f - (4 * s);  // flipped for OpenGL
-    float vMax = 1.0f - (3 * s);
+    BlockData::UVCoord uv = BlockData::blockUVs[(int)block][(int)face];
 
     glm::vec2 uvCoords[4] = {
-        {uMin, vMin},  // bottom left
-        {uMax, vMin},  // bottom right
-        {uMax, vMax},  // top right
-        {uMin, vMax},  // top left
+        {uv.uMin, uv.vMax},  // bottom left
+        {uv.uMax, uv.vMax},  // bottom right
+        {uv.uMax, uv.vMin},  // top right
+        {uv.uMin, uv.vMin},  // top left
     };
 
     for (int i = 0; i < 4; i++) {

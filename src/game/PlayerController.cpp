@@ -22,6 +22,8 @@ void PlayerController::handleMovement(InputManager& input, CameraPose& cam) {
     }
 }
 
+// TODO: When player looks near vertical poles, camera freaks out.
+
 void PlayerController::handleLook(InputManager& input, CameraPose& cam) {
     glm::vec2 mouseDelta = input.getMouseDelta();
 

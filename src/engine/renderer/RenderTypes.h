@@ -10,7 +10,7 @@
 #include <glm/glm.hpp>
 
 
-/*
+/*    - Revelation in my journey in C++ - 
 This right here is truly where I understood the power of why C++
 is not just C with classes, but it provides incredible abstraction
 with the power of C.
@@ -36,6 +36,11 @@ Now our code provides necessary abstrarction, not uselessly abstract code,
 but abstraction that provides insane long term scalability,
 which is what true OOP is.
 */
+
+// Typed aliases for resource handles. Game code works with these opaque IDs
+// rather than raw pointers or OpenGL objects — the engine owns the actual
+// GPU resources and resolves handles internally. This keeps the game layer
+// completely decoupled from the graphics API.
 
 using MeshHandle = uint32_t;
 using ShaderID = uint32_t;

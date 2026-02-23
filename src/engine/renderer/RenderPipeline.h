@@ -8,6 +8,11 @@ class Renderer;
 class ResourceManager;
 class Scene;
 
+// Deferred rendering pipeline — game code submits draw commands during
+// onRender(), and they're batched into a command queue. Nothing hits
+// the GPU until endScene() flushes the queue. This keeps the game
+// decoupled from OpenGL and lets us sort/batch commands later.
+
 class RenderPipeline {
 public:
     void init(Renderer& renderer, ResourceManager& resourceManager, Scene& scene);

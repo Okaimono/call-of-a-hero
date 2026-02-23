@@ -17,6 +17,8 @@ void RenderPipeline::beginScene(const glm::mat4& viewProj) {
     viewProjection = viewProj;
 }
 
+// Pre-multiply MVP here so the command queue stores final matrices,
+// keeping the flush loop simple and batch-friendly.
 void RenderPipeline::submit(ShaderID shader, TextureID texture, MeshHandle mesh, const glm::mat4& modelMatrix) {
     glm::mat4 mvp = viewProjection * modelMatrix;
     commandQueue.push_back({shader, texture, mesh, mvp});

@@ -5,6 +5,12 @@ class InputManager;
 class Scene;
 class ResourceManager;
 
+// TODO: Take all the references and place them into a struct for init and update
+
+// Game implements this. Engine calls into it. Game never knows about engine internals like
+// window. Engine never knows about game internals. Game interacts with engine with provided
+// engine interfaces such as renderPipeline, inputManager, scene and resourceManager. 
+
 class Application {
 public:
     virtual ~Application() = default;

@@ -1,6 +1,8 @@
 #pragma once
 #include "engine/renderer/RenderTypes.h"
 
+// All the external textures.
+
 namespace Assets {
     namespace Shaders {
         constexpr ShaderID DEFAULT = 0;

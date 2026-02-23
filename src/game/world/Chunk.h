@@ -3,10 +3,6 @@
 
 #include <glm/glm.hpp>
 
-enum class Face {
-    TOP, BOTTOM, NORTH, SOUTH, EAST, WEST
-};
-
 class Chunk {
 public:
     void init();

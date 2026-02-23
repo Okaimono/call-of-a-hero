@@ -14,18 +14,23 @@ namespace BlockData {
     constexpr UVCoord blockUVs[(int)BlockID::COUNT][(int)Face::COUNT] = {
         // AIR - doesn't matter, never meshed
         {},
-        // GRASS
+        // GRASS BLOCK
         {
             tileToUV(0, 0),  // TOP
-            tileToUV(2, 0),  // BOTTOM
-            tileToUV(1, 0),  // NORTH
-            tileToUV(1, 0),  // SOUTH
-            tileToUV(1, 0),  // EAST
-            tileToUV(1, 0),  // WEST
+            tileToUV(0, 2),  // BOTTOM
+            tileToUV(0, 1),  // NORTH
+            tileToUV(0, 1),  // SOUTH
+            tileToUV(0, 1),  // EAST
+            tileToUV(0, 1),  // WEST
         },
+        // DIRT BLOCK
+        {
+            tileToUV(0, 2),  // TOP
+            tileToUV(0, 2),  // BOTTOM
+            tileToUV(0, 2),  // NORTH
+            tileToUV(0, 2),  // SOUTH
+            tileToUV(0, 2),  // EAST
+            tileToUV(0, 2),  // WEST
+        }
     };
-
-    constexpr const UVCoord& getUV(BlockID block, Face face) {
-        return blockUVs[(int)block][(int)face];
-    }
 }
