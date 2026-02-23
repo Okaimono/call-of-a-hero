@@ -39,6 +39,15 @@ The original engine this rewrites — [cpp-zero-to-hero](https://github.com/Okai
 
 *Clean engine rewrite — single chunk demo*
 
+## Original Project Demos - [cpp-zero-to-hero](https://github.com/Okaimono/cpp-zero-to-hero)
+
+- [**Video 1** — 7 Weeks of Learning C++/OpenGL Progress](https://www.youtube.com/watch?v=fH129ybGQDQ)
+  *Physics, mining, placing, and early engine progress*
+- [**Video 2** — Creeper AI & Movement](https://www.youtube.com/watch?v=EqHFVoe95TQ)
+  *A* pathfinding, mob animation, and entity systems*
+- [**Video 3** — 45 Chunk Render Distance at 300 FPS](https://www.youtube.com/watch?v=X2Rf_YjeDkg)
+  *Multithreaded chunk streaming, GPU memory pool, render performance*
+
 ---
 
 ## Architecture
