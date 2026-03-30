@@ -1,7 +1,5 @@
 #include "InputManager.h"
 
-
-
 void InputManager::init(GLFWwindow* win) {
     window = win;
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);

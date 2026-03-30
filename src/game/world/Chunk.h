@@ -5,7 +5,8 @@
 
 class Chunk {
 public:
-    void init();
+    Chunk();
+    
     BlockID getBlock(int x, int y, int z) const { return blocks[x][y][z]; }
 private:
     glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);

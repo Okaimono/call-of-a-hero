@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 
 class EBO {
-public: 
+public:
     EBO();
     ~EBO();
 

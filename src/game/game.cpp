@@ -5,12 +5,12 @@
 #include "engine/Scene.h"
 #include "engine/InputManager.h"
 #include "engine/renderer/Camera.h"
-
 #include "assets.h"
 
+#include <cstdio>
+
 void Game::onInit(RenderPipeline& renderPipeline, ResourceManager& resourceManager) {
-    worldRenderer.init(renderPipeline);
-    world.init();
+    worldRenderer.init(renderPipeline, world);
 
     initShaders(resourceManager);
     initTextures(resourceManager);

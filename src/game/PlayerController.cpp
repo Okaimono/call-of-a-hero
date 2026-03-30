@@ -1,8 +1,10 @@
 #include "PlayerController.h"
+#include <iostream>
 
 void PlayerController::update(InputManager& input, CameraPose& cam) {
     handleMovement(input, cam);
     handleLook(input, cam);
+    debug(input, cam);
 }
 
 void PlayerController::handleMovement(InputManager& input, CameraPose& cam) {
@@ -33,4 +35,10 @@ void PlayerController::handleLook(InputManager& input, CameraPose& cam) {
     glm::vec3 newOrientation = glm::rotate(cam.orientation, -rotX, cam.up);
     newOrientation = glm::rotate(newOrientation, rotY, glm::normalize(glm::cross(newOrientation, cam.up)));
     cam.orientation = newOrientation;
+}
+
+void PlayerController::debug(InputManager& input, CameraPose& cam) {
+    if (input.wasKeyPressed(GLFW_KEY_C)) {
+        std::cout << cam.position.x << ", " << cam.position.y << ", " << cam.position.z << "\n";
+    }
 }

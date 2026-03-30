@@ -5,10 +5,6 @@
 
 #include <vector>
 
-// 
-//
-//
-
 class ResourceManager {
 public:
     void createShader(const char* vertexFile, const char* fragmentFile);

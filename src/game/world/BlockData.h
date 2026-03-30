@@ -31,6 +31,15 @@ namespace BlockData {
             tileToUV(0, 2),  // SOUTH
             tileToUV(0, 2),  // EAST
             tileToUV(0, 2),  // WEST
+        },
+        // APPLE
+        {
+            tileToUV(1, 11),
+            tileToUV(1, 11),
+            tileToUV(1, 11),
+            tileToUV(1, 11),
+            tileToUV(1, 11),
+            tileToUV(1, 11),
         }
     };
 }

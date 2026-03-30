@@ -11,4 +11,5 @@ public:
     void update(InputManager& input, CameraPose& cam);
     void handleMovement(InputManager& input, CameraPose& cam);
     void handleLook(InputManager& input, CameraPose& cam);
+    void debug(InputManager& input, CameraPose& cam);
 };

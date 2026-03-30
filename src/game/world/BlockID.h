@@ -4,7 +4,7 @@ enum class BlockID {
     AIR = 0,
     GRASS,
     DIRT,
-    STONE,
+    APPLE,
     COBBLESTONE,
     SAND,
     GRAVEL,

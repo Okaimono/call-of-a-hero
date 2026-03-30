@@ -9,7 +9,6 @@ ORDER:
 4. Multithread
 5. Render Distance
 6. Frustrum Cull
-
 */
 
 static const glm::vec3 faceVertices[6][4] = {
@@ -40,7 +39,7 @@ static const glm::ivec3 adjacentSide[(int)Face::COUNT] = {
 // all the render distance system and stuff, make it so that those bordering chunks are 
 // brought here to cull required faces.
 
-void ChunkMesher::mesh(Chunk& chunk, MeshData& mesh) {
+void ChunkMesher::mesh(Chunk& chunk, MeshData& mesh, ChunkNeighbors neighbors) {
     mesh.vertices.clear();
     mesh.indices.clear();
 
@@ -53,7 +52,7 @@ void ChunkMesher::mesh(Chunk& chunk, MeshData& mesh) {
                 glm::ivec3 pos(x, y, z);
                 for (int f = 0; f < (int)Face::COUNT; f++) {
                     Face face = (Face)f;
-                    if (!isSolid(face, chunk, pos))
+                    if (!isSolid(face, chunk, pos) && !isBorder(face, chunk, neighbors, pos))
                         addFace(block, face, mesh, glm::vec3(pos));
                 }
             }
@@ -70,6 +69,22 @@ bool ChunkMesher::isSolid(Face face, Chunk& chunk, const glm::ivec3& position) {
         return false;
 
     return chunk.getBlock(n.x, n.y, n.z) != BlockID::AIR;
+}
+
+bool ChunkMesher::isBorder(Face face, Chunk& chunk, const ChunkNeighbors& neighbors, const glm::ivec3& position) {
+    if (neighbors.north && position.z == 15 && face == Face::NORTH)
+        return neighbors.north->getBlock(position.x, position.y, 0) != BlockID::AIR;
+
+    if (neighbors.south && position.z == 0 && face == Face::SOUTH)
+        return neighbors.south->getBlock(position.x, position.y, 15) != BlockID::AIR;
+
+    if (neighbors.east && position.x == 15 && face == Face::EAST)
+        return neighbors.east->getBlock(0, position.y, position.z) != BlockID::AIR;
+
+    if (neighbors.west && position.x == 0 && face == Face::WEST)
+        return neighbors.west->getBlock(15, position.y, position.z) != BlockID::AIR;
+
+    return false;
 }
 
 void ChunkMesher::addFace(BlockID block, Face face, MeshData& mesh, const glm::vec3& position) {
